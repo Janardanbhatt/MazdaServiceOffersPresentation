@@ -14,10 +14,10 @@ interface Props {
 
 class GenuineMazdaAccessories extends Component<Props, {}>{
 	render(){
-		const {genuine_mazda_accessories_fade_text,setParallex_independent_left,setParallex_independent_right}=this.props.mainStore;
-		console.log(genuine_mazda_accessories_fade_text,setParallex_independent_left,setParallex_independent_right)
+		const {personalizeMazda,genuine_mazda_accessories_fade_text,setParallex_independent_left,setParallex_independent_right}=this.props.mainStore;
+		//console.log(genuine_mazda_accessories_fade_text,setParallex_independent_left,setParallex_independent_right)
 		return(
-			<section className={genuine_mazda_accessories_fade_text ? "two-section-merge has-fixed z-index-2 genuine-mazda-accessories anmiateFadeOut" : "two-section-merge has-fixed z-index-2 genuine-mazda-accessories"}>        
+			<section className={genuine_mazda_accessories_fade_text ? "two-section-merge has-fixed z-index-2 genuine-mazda-accessories anmiateFadeOut" : "two-section-merge has-fixed z-index-2 genuine-mazda-accessories"} id='accessories-1'>        
 					    {/*<!--Common block start-->*/}
 					    <section className="common-detail-block">
 					       <div className="full-height d-flex align-items-center text-center">
@@ -27,7 +27,7 @@ class GenuineMazdaAccessories extends Component<Props, {}>{
 					                   <FormattedMessage id='genuine_mazda_accessories_p' defaultMessage={ STRCONSTANT.common.default.genuine_mazda_accessories_p }/>
 					                </p>
 					                <div className="btn-block">
-					                    <a href="#" title="Learn More" className="btn_normal">Learn more</a>
+					                    <a href={personalizeMazda} title="Learn More" className="btn_normal">Learn more</a>
 					                </div>
 					            </div>
 					        </div>

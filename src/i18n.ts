@@ -62,6 +62,7 @@ export default {
     'top-nav-accessories': 'ACCESSOIRES',
     'top-nav-the-experts': 'LES EXPERTS',
     'top-nav-tires': 'Pneus',
+    'top-nav-brakes':'FREINS',
 
       //the experts
       'the-experts-title':'NE FAITES CONFIANCE QU’AUX EXPERTS',

@@ -39,7 +39,7 @@ export const STRCommon = {
       benifits_of_mazda_brake_h1:'the benefits of Mazda brake maintenance',
       benifits_of_mazda_brake_p:'There is no better time than spring to clean and service your brakes from the salt and debris that accumulate during winter. Compared to after-market brake pads and rotors, Mazda Genuine parts are engineered with your vehicle in mind, so they last longer and work better. Allowing you to spend more time on the road and less time worrying about maintenance.',
       genuine_mazda_accessories_h1:'Genuine Mazda Accessories',
-      genuine_mazda_accessories_p:renderHTML('Genuine Mazda Accessories are the perfect fit for your vehicle and designed for your active lifestyle. Outfit your vehicle with a Genuine Mazda roof rack<sup>†</sup>, cargo box<sup>†</sup>, trailer hitch mounted bike rack<sup>†</sup>, or low wall all-weather floor mats† and make sure you’re ready for any journey this spring.'),
+      genuine_mazda_accessories_p:renderHTML('Genuine Mazda Accessories are the perfect fit for your vehicle and designed for your active lifestyle. Outfit your vehicle with a Genuine Mazda roof rack<sup>†</sup>, cargo box<sup>†</sup>, trailer hitch mounted bike rack<sup>†</sup>, or low wall all-weather floor mats<sup>†</sup> and make sure you’re ready for any journey this spring.'),
       maintain_your_joy_h1:'Maintain your joy',
       maintain_your_joy_p:'Visit your Mazda Clubhouse for expert detailing service, and rediscover the beauty and craftsmanship that made you fall in love with your Mazda.',
       header_dealer_name:renderHTML('<a href="#" alt="Dealer Name" class="deal-name">&lt; Dealer name &gt;</a>'),

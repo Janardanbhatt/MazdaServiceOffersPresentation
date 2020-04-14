@@ -116,7 +116,7 @@ class Offers extends Component<Props, {}> {
     };
 
   renderOffers = (offer, lang, index) => {
-
+    console.log(renderHTML(offer.offer_title));
 
              return (
                  <div id="offers" className={(index % 2) == 0 ? 'main' : 'main with_border'}
@@ -189,7 +189,7 @@ class Offers extends Component<Props, {}> {
     const {isDealerInfoAvailable, currentDealerOffers, nationalOffers, lang } = this.props.mainStore;
 
     var currentOffers = isDealerInfoAvailable ? currentDealerOffers : nationalOffers;
-
+    console.log(currentOffers);
     return (
         <StyledOffers>
             <Responsive minWidth={769}>

@@ -9,10 +9,10 @@ import TopNav from "../container/TopNav";
 import renderHTML from 'react-render-html';
 
 
-//const spring_tire_event = '/img/spring_tire_event.png';
-const hero_panel_first_bg = '/img/hero_panel_first_bg.jpg';
-const hero_panel_first_bg_tablet = '/img/hero_panel_first_bg_tablet.jpg';
-const hero_panel_first_bg_mob = '/img/hero_panel_first_bg_mob.jpg';
+//const spring_tire_event = 'img/spring_tire_event.png';
+const hero_panel_first_bg = 'img/hero_panel_first_bg.jpg';
+const hero_panel_first_bg_tablet = 'img/hero_panel_first_bg_tablet.jpg';
+const hero_panel_first_bg_mob = 'img/hero_panel_first_bg_mob.jpg';
 interface Props {
     mainStore: MainStore,
 }
@@ -27,7 +27,7 @@ class HeroBannerBlock extends Component<Props, {}> {
     };
 	render() {
     	const { scrollTop } = this.props.mainStore;
-    	console.log(scrollTop);
+    	//console.log(scrollTop);
   		return (
   			<section className="hero-banner-block full-height trans-5s" style={{transform :'translateY('+scrollTop+')'}}>
   			<TopNav/>

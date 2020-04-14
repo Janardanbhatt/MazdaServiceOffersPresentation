@@ -2,7 +2,7 @@ import { Component } from 'react';
 import * as React from 'react';
 import { MainStore } from '../stores/mainStore';
 import Footer from "../container/Footer";
-import SearchDealerOnName from "./SearchDealerOnName";
+import AuthorizeDealerBottom from "../container/AuthorizeDealerBottom";
 import {typedInject} from "../stores/rootStore";
 import { STRCONSTANT } from '../constant';
 import { FormattedMessage } from "react-intl";
@@ -15,7 +15,7 @@ class MaintainYourJoy extends Component<Props, {}>{
 	render(){
 		const {maintain_your_joy_fade_text} =this.props.mainStore;
 		return(
-		<section className={maintain_your_joy_fade_text ? "three-section-merge has-fixed z-index-1 maintain-your-joy anmiateFadeOut" :"three-section-merge has-fixed z-index-1 maintain-your-joy"}>				    	    
+		<section className={maintain_your_joy_fade_text ? "three-section-merge has-fixed z-index-1 maintain-your-joy anmiateFadeOut" :"three-section-merge has-fixed z-index-1 maintain-your-joy"} id='tires-1'>				    	    
 		                    {/*<!--Common block start-->*/}
 					    <section className="common-detail-block">
 					       <div className="full-height d-flex align-items-center text-center">
@@ -34,19 +34,7 @@ class MaintainYourJoy extends Component<Props, {}>{
 					    {/*<!--Authorized dealer start-->*/}
 					    <section className="authorized-dealer-block">
 					        <div className="container text-center">
-					                <h1><FormattedMessage id="second-panel-title-h1"
-                                        		defaultMessage={ STRCONSTANT.springtire.default.second_panel_title_h1} /></h1>
-					                <p> <FormattedMessage id='second-panel-title-p' defaultMessage={ STRCONSTANT.springtire.default.second_panel_title_p} /> <a href="tel:5197352211" title="5197352211">519-735-2211</a></p>
-					                <div className="select-dealer">
-					                <SearchDealerOnName />
-					                  </div>
-					                <div className="btn-block">
-					                <a href="#" title="Schedule Appointment" className="btn_normal">schedule appointment</a>
-					                </div>
-					                <div className="btn-block">
-					                <a href="#" title="Quote Your Tires" className="btn_normal">QUOTE YOUR TIRES</a>
-					                </div>
-					                
+					                <AuthorizeDealerBottom/>
 					            </div>
 					    </section>
 					    {/*<!--Authorized dealer End-->*/}

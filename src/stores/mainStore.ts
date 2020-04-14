@@ -21,6 +21,7 @@ export class MainStore {
   @observable dealerNumber = '';
   @observable dealerID = '';
   @observable dealerName: string = '';
+  @observable dealerShortName: string = '';
   @observable dealerAppointment: string = '';
   @observable quoteTires: string = '';
   @observable personalizeMazda: string = '';
@@ -55,7 +56,6 @@ export class MainStore {
   @observable setParallex = '';
   @observable setParallex_independent_left = '0%';
   @observable setParallex_independent_right = '0%';
-  @observable bodyMaxHeight:number;
   @observable isDealerInfoAvailable = false;
   @observable uri = '';
   @observable searchPopupActionButton: string = '';
@@ -69,13 +69,14 @@ export class MainStore {
 
   constructor(private _routerStore: RouterStore) {
       this.checkCarouselDate();
-      /*this.viewport();*/
+      var bodyElement=<HTMLElement>document.querySelector('body');
+      window.addEventListener('load',function(){
+        if(window.innerWidth > 1200){bodyElement.classList.add('keep-front');
+        }
+      });
       window.addEventListener('scroll',this.listenToScroll);
       window.addEventListener('scroll',this.handleScrollSection);
-      window.addEventListener('load',this.viewPortHeight);
       window.addEventListener('touchmove',this.handleScrollMob);
-      window.addEventListener('scroll',this.viewPortHeight);
-      window.addEventListener('resize',this.viewPortHeight);
       window.addEventListener('wheel', this.handleScroll);
       if (this._routerStore.langValue) {
           this.lang = (
@@ -631,12 +632,14 @@ export class MainStore {
     }
 
     try {
-        dealerInfo = await axios.get(`${apiBaseUrl}${getDealerUrl}?dn=${ this._routerStore.pathNameParams ? this._routerStore.pathNameParams : this.dealerNumber}&crmcid=${ this._routerStore.CUSTOMERIDValue ? this._routerStore.CUSTOMERIDValue : ''}`)
-        this.dealerName = this._routerStore.pathNameParams;
+       dealerInfo = await axios.get(`${apiBaseUrl}${getDealerUrl}?dn=${ this._routerStore.pathNameParams ? this._routerStore.pathNameParams : this.dealerNumber}&crmcid=${ this._routerStore.CUSTOMERIDValue ? this._routerStore.CUSTOMERIDValue : ''}`)
+       console.log(dealerInfo);
+        this.dealerShortName = this._routerStore.pathNameParams;
         this.setCustomer(dealerInfo.data.redirects.quote_your_tires_url, dealerInfo.data.redirects.personalize_your_mazda_url);
         this.setCurrentOffers(dealerInfo.data.dealer[0].dealer_offers);
         this.setNationalOffers(dealerInfo.data.national_offers);
         this.setCurrentDealer(dealerInfo.data.dealer[0]);
+        console.log(this.setCurrentDealer(dealerInfo.data.dealer[0]));
     }catch {}
 
     return {
@@ -654,7 +657,7 @@ export class MainStore {
   openSearchDealerModal(actionButton) {
       document.getElementsByTagName("META")[1].innerHTML = "<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=0'>";
 
-      this.trackingEventDealer('Not Your Dealer');
+    this.trackingEventDealer('Not Your Dealer');
     this.searchDealerModal = true;
     this.setSearchPoupActionClick(actionButton);
   }
@@ -687,99 +690,47 @@ export class MainStore {
           return !(rect.bottom < 0 || rect.top - viewHeight >= 0);
   }
 
- @action.bound 
-  viewPortHeight() {
-    //alert();
-            //console.log( ? true :false);
-            var herohome=<HTMLElement>document.querySelector(".hero-banner-block");
-            var springhome=<HTMLElement>document.querySelector('.spring_tire_event');
-            var genuinebrakehome=<HTMLElement>document.querySelector('.benifits-of-mazda-brake');
-            var benifitsofmazdahome=<HTMLElement>document.querySelector('.genuine-break-maintain');
-            var genuinemazdahome=<HTMLElement>document.querySelector('.genuine-mazda-accessories');
-            var maintainyorjoyhhome=<HTMLElement>document.querySelector('.maintain-your-joy');
-            var footerElement=<HTMLElement>document.querySelector('footer');
-            var totalHeight=herohome.clientHeight + springhome.clientHeight + genuinebrakehome.clientHeight+benifitsofmazdahome.clientHeight+genuinemazdahome.clientHeight+maintainyorjoyhhome.clientHeight;
-            console.log(totalHeight);
-             if( /Android|webOS|iPhone|iPad|iPod|Opera Mini/i.test(navigator.userAgent) ){
-                if ((document.documentElement.clientWidth >= 991 && document.documentElement.clientWidth < 1200 && window.matchMedia("(orientation: portrait)").matches)) {
-                  let exactBodyHeight=totalHeight- document.documentElement.clientHeight*1.5 - footerElement.clientHeight;
-                  console.log(exactBodyHeight);
-                  if (this.checkVisible(footerElement)) {
-                      let exactBodyHeight = totalHeight - document.documentElement.clientHeight + footerElement.clientHeight;
-                      this.bodyMaxHeight=exactBodyHeight;
-                  }
-                 }
-                if ((document.documentElement.clientWidth >= 767 && document.documentElement.clientWidth < 991) && window.matchMedia("(orientation: portrait)").matches) {
-                  let exactBodyHeight=totalHeight - document.documentElement.clientHeight/2-maintainyorjoyhhome.clientHeight + footerElement.clientHeight
-                  console.log(exactBodyHeight);
-                    if (this.checkVisible(footerElement)) {
-                        let exactBodyHeight = totalHeight - document.documentElement.clientHeight/2-maintainyorjoyhhome.clientHeight + footerElement.clientHeight-51;
-                        this.bodyMaxHeight=exactBodyHeight;                
-                      }
-                }
-                if (document.documentElement.clientWidth <= 767 && window.matchMedia("(orientation: portrait)").matches) {
-                   let exactBodyHeight = totalHeight - document.documentElement.clientHeight/2-maintainyorjoyhhome.clientHeight + footerElement.clientHeight;
-                   console.log(exactBodyHeight);
-                    if (this.checkVisible(footerElement)) {
-                       let exactBodyHeight = totalHeight - document.documentElement.clientHeight/2-maintainyorjoyhhome.clientHeight + footerElement.clientHeight;
-                        this.bodyMaxHeight=exactBodyHeight;
-                    }
-                }
-                if (document.documentElement.clientWidth >= 667 && document.documentElement.clientWidth < 1024 && window.matchMedia("(orientation: landscape)").matches) {
-                  alert('landscape')
-                    if (this.checkVisible(footerElement)) {
-                        let exactBodyHeight = totalHeight - document.documentElement.clientHeight -maintainyorjoyhhome.clientHeight +40;
-                        this.bodyMaxHeight=exactBodyHeight;
-                    }
-                }
-          }else{
-            if (document.documentElement.clientWidth >= 1200) {
-                if (this.checkVisible(footerElement)) {
-                    let exactBodyHeight = totalHeight - document.documentElement.clientHeight +25/*+ footerElement.clientHeight-*/;
-                    this.bodyMaxHeight=exactBodyHeight;
-                }
-            }
-            if (document.documentElement.clientWidth >= 667 && document.documentElement.clientWidth < 1200) {
-                if (this.checkVisible(footerElement)) {
-                    let exactBodyHeight = totalHeight - document.documentElement.clientHeight*1.5 - footerElement.clientHeight;
-                    this.bodyMaxHeight=exactBodyHeight;
-                }
-              }
-            }
-
-        }
-
-
-
-
-
   @action.bound
    handleScroll(e){
+      var f = navigator.userAgent.search("Firefox");
       var spring_tire_eventElement = <HTMLElement>document.querySelector('.spring_tire_event')
       var hero_banner_height=<HTMLElement>document.querySelector('.hero-banner-block');
+      var bodyElement=<HTMLElement>document.querySelector('body');
       var windowHeight=Math.round(this.getWindowHeight/10);
-      var animation_done_genuine_break=<HTMLElement>document.querySelector(".animation_done_genuine_break");
-      var now_relative=<HTMLElement>document.querySelector(".now-relative");
-      var benifits_of_mazdabreakElement=<HTMLElement>document.querySelector(".benifits-of-mazda-brake");
+      /*var animation_done_genuine_break=<HTMLElement>document.querySelector(".animation_done_genuine_break");
+      var now_relative=<HTMLElement>document.querySelector(".ani-fill-out");
+      var benifits_of_mazdabreakElement=<HTMLElement>document.querySelector(".benifits-of-mazda-brake");*/
       if(e.deltaY < 0){
         this.scaleFrist += e.deltaY/10;
+         //this.scrollTop= '0';
+         //this.spring_first_fade=true;
+         //spring_tire_eventElement.removeAttribute('style')
       }
       else if(e.deltaY > 0){
           this.scaleFrist += e.deltaY/10;
           this.scrollTop= -100+"%";
           this.spring_first_fade=true;
-      if(this.scaleFrist >= windowHeight && this.checkVisible(document.querySelector('.spring_tire_event'))===true){
+          console.log(this.scaleFrist >= windowHeight ? true :false)
+     if(f>-1 || window.innerWidth<=991 || window.innerWidth > 991){     
+      if(this.scaleFrist >= windowHeight/3 && this.checkVisible(spring_tire_eventElement) && hero_banner_height.style.transform==='translateY(-100%)'){
           this.section_2=true;
+          bodyElement.classList.remove('keep-front');
           spring_tire_eventElement.style.top=-hero_banner_height.clientHeight+"px";
           spring_tire_eventElement.style.position='relative';
 
+        }if(this.scaleFrist < windowHeight/3 && !this.checkVisible(spring_tire_eventElement) && hero_banner_height.style.transform==='translateY(0)'){
+          bodyElement.classList.add('keep-front');
+          this.section_2=false;
+          spring_tire_eventElement.removeAttribute('style');
         }
-      if( animation_done_genuine_break && now_relative){
-            if(this.scaleFrist > Math.round((animation_done_genuine_break.clientHeight + now_relative.clientHeight)/10)){
-              benifits_of_mazdabreakElement.style.top=-document.documentElement.clientHeight+"px"; 
-              benifits_of_mazdabreakElement.style.position="relative";
-            }
-          }
+      }else{
+        if(this.scaleFrist >= windowHeight && this.checkVisible(spring_tire_eventElement)){
+          this.section_2=true;
+            bodyElement.classList.remove('keep-front');
+             spring_tire_eventElement.style.top=-hero_banner_height.clientHeight+"px";
+             spring_tire_eventElement.style.position='relative';
+        }
+      } 
       }
    }
 
@@ -801,7 +752,7 @@ export class MainStore {
       parallex_2(item) {
               if (document.documentElement.clientWidth > 767 && document.documentElement.clientWidth <= 991) {
                   if (this.checkVisible(item) && document.documentElement.scrollTop > postion) {
-                      console.log("down")
+                      //console.log("down")
                       var $slider = item;
 
                       var yPos1 = i /*(window.pageYOffset/10) / $slider.dataset.speed;*/
@@ -813,9 +764,9 @@ export class MainStore {
                       i = i + 5;
                       j++;
                       //j++;
-                      console.log(i);
+                      //console.log(i);
                   } else if (this.checkVisible(item) && document.documentElement.scrollTop < postion) {
-                      console.log("up")
+                      //console.log("up")
                       var $slider = item;
 
                       var yPos1 = i /*(window.pageYOffset/10) / $slider.dataset.speed;*/
@@ -826,12 +777,12 @@ export class MainStore {
                       this.setParallex_independent_right= yPos2 / 10 + "%";
                           i = i - 10;
                           j--;
-                          console.log(i);
+                          //console.log(i);
                       }
                       //postion=scroll;
                   } else if (document.documentElement.clientWidth <= 767) {
                       if (this.checkVisible(item) && document.documentElement.scrollTop > postion) {
-                          console.log("down")
+                         // console.log("down")
                           var $slider = item;
 
                           var yPos1 = i; /*(window.pageYOffset/10) / $slider.dataset.speed;*/
@@ -842,9 +793,9 @@ export class MainStore {
                           this.setParallex_independent_right= yPos2 / 10 + "%";
                           i = i;
                           j++;
-                          console.log(i);
+                          //console.log(i);
                       } else if (this.checkVisible(item) && document.documentElement.scrollTop < postion) {
-                          console.log("up")
+                         // console.log("up")
                           var $slider = item;
 
                           var yPos1 = i /*(window.pageYOffset/10) / $slider.dataset.speed;*/
@@ -855,7 +806,7 @@ export class MainStore {
                           this.setParallex_independent_right= yPos2 / 10 + "%";
                           i = i;
                           j--;
-                          console.log(i);
+                          //console.log(i);
                       }
                       // postion=scroll;
 
@@ -878,19 +829,35 @@ export class MainStore {
    handleScrollMob(e){
           var now_relativeElement = <HTMLElement>document.querySelector('.spring_tire_event');
           var hero_height = <HTMLElement>document.querySelector('.hero-banner-block');
-            this.scrollTop= -100 + "%";
+          var bodyElement = <HTMLElement>document.querySelector('body');
             this.section_2=true;
+            this.scrollTop= -100 + "%";
             this.spring_first_fade=true;
-
-            now_relativeElement.style.top =-hero_height.clientHeight+"px";
+            console.log(this.checkVisible(hero_height) ? true :false);
+             if(hero_height.style.transform==='translateY(-100%)'){
+              setTimeout(function(){
+                bodyElement.classList.remove('keep-front')
+                now_relativeElement.style.position='relative';
+                now_relativeElement.style.top =-hero_height.clientHeight+"px";
+              },2000);
+            }
+            //console.log(window.clearTimeout(clearTimeout));
+            if(hero_height.style.transform==='translateY(0)'){
+               bodyElement.classList.add('keep-front')
+               now_relativeElement.removeAttribute('style');
+              }
         }
 
 
    @action.bound
     handleScrollSection(e) {
+      var bodyElement=<HTMLElement>document.querySelector('body');
       var spring_tire_eventElement = <HTMLElement>document.querySelector('.spring_tire_event');
+      //var mobileSegment = <HTMLElement>document.querySelector('.mobile-segment');
+      var genuine_break_maintain = <HTMLElement>document.querySelector('.genuine-break-maintain');
       var  wrapper= <HTMLElement>document.querySelector('.wrapper');
       var benifits_of_mazdabreakElement=<HTMLElement>document.querySelector(".benifits-of-mazda-brake");
+      var allHeight:NodeListOf<Element>=document.querySelectorAll(".has-fixed");
       var genuine_mazda_accessoriesElement=<HTMLElement> document.querySelector(".genuine-mazda-accessories");
       var maintain_your_joyElement=<HTMLElement> document.querySelector(".maintain-your-joy");
       var scroll=document.documentElement.scrollTop;
@@ -899,6 +866,7 @@ export class MainStore {
       var two_parallex_image=<HTMLElement>document.querySelector(".parallex-2");
       var two_parallex_all_element:NodeListOf<Element>=document.querySelectorAll(".parallex-2");
       var footerElement=<HTMLElement>document.querySelector("footer");
+      //console.log(mobileSegment);
       three_parallex_image && (three_parallex_all_element as any as Array<HTMLElement>).forEach((item, index) => {
                 if (this.checkVisible(item)) {
                     this.parallax(item);
@@ -908,133 +876,156 @@ export class MainStore {
         if(this.checkVisible(item))
           this.parallex_2(item);
       });
+      
 
-
-      if(document.documentElement.clientWidth >= 991){
-          if((window.innerHeight + window.scrollY) >= wrapper.offsetHeight){
-            this.now_relative_scrolled_bottom = true;
-            this.section_3_transform = -100+"%";
-            this.benifits_of_mazda_brake_fade_text=true;
-           }
-          else if(document.documentElement.scrollTop==0){
-            spring_tire_eventElement.removeAttribute("style");
-            this.scrollTop='0';
-            this.section_2=false;
-            this.spring_first_fade=false;
+      if (document.documentElement.clientWidth >= 991) {
+          if (this.checkVisible(genuine_break_maintain) && (window.innerHeight + window.scrollY) >= wrapper.offsetHeight) {
+              this.now_relative_scrolled_bottom = true;
+              this.section_3_transform = -100 + "%";
+              this.benifits_of_mazda_brake_fade_text = true;
+              //setTimeout(()=>{
+              benifits_of_mazdabreakElement.style.position="relative";
+              benifits_of_mazdabreakElement.style.top=-document.documentElement.clientHeight+"px"; 
+            //},2000)
           }
-          else if(spring_tire_eventElement.clientHeight >= document.documentElement.scrollTop){
-              this.section_3_transform = '0';
-              this.benifits_of_mazda_brake_fade_text=false;
+          if(spring_tire_eventElement.clientHeight > document.documentElement.scrollTop){
+            this.section_3_transform = '0';
+              this.benifits_of_mazda_brake_fade_text = false;
               benifits_of_mazdabreakElement.removeAttribute("style");
-            }
-          if((spring_tire_eventElement.clientHeight + benifits_of_mazdabreakElement.clientHeight - document.documentElement.clientHeight/2) < document.documentElement.scrollTop){
-              this.genuine_mazda_accessories_fade_text=true;
-
-              if ((window.innerHeight + window.scrollY) >= wrapper.offsetHeight) {
-                genuine_mazda_accessoriesElement.style.top=-document.documentElement.clientHeight+"px"; 
-                genuine_mazda_accessoriesElement.style.position="relative";
-              }
-            }else if((spring_tire_eventElement.clientHeight + benifits_of_mazdabreakElement.clientHeight + document.documentElement.clientHeight/2) >= document.documentElement.scrollTop){
-              console.log("yes");
-              this.genuine_mazda_accessories_fade_text=false;
-              genuine_mazda_accessoriesElement.removeAttribute("style");
-            }
-            if(document.documentElement.scrollTop < postion){
-              if((spring_tire_eventElement.clientHeight + benifits_of_mazdabreakElement.clientHeight) >= document.documentElement.scrollTop && genuine_mazda_accessoriesElement.style.position==='relative'){
-                 console.log("yes1");
-                this.genuine_mazda_accessories_fade_text=false;
-                genuine_mazda_accessoriesElement.removeAttribute("style");
-              }
-              console.log('Scrolling Up Scripts');
-            }
-            if((spring_tire_eventElement.clientHeight + benifits_of_mazdabreakElement.clientHeight + genuine_mazda_accessoriesElement.clientHeight - document.documentElement.clientHeight) < document.documentElement.scrollTop){
-              console.log("yes 1")
-              this.maintain_your_joy_fade_text=true;
-                if ((window.innerHeight + window.scrollY) >= wrapper.offsetHeight) {
-                  //maintain_your_joyElement.style.top=-maintain_your_joyElement.clientHeight+"px"; 
-                  maintain_your_joyElement.style.position="relative";
-              }
-            }
-            if(document.documentElement.scrollTop < postion){
-            if(!this.checkVisible(footerElement)){
-              if((spring_tire_eventElement.clientHeight + benifits_of_mazdabreakElement.clientHeight +genuine_mazda_accessoriesElement.clientHeight + document.documentElement.clientHeight/2) >= document.documentElement.scrollTop){
-                console.log("yes");
-                this.maintain_your_joy_fade_text=false;
-                maintain_your_joyElement.removeAttribute("style");
-              }
-             }
-            }
-      }
-
-      if(document.documentElement.clientWidth < 991){
-          if(document.documentElement.scrollTop==0){
-              spring_tire_eventElement && spring_tire_eventElement.removeAttribute("style")
-              this.scrollTop='0';
+          }
+          if (document.documentElement.scrollTop == 0) {
+              this.scrollTop = '0';
               this.section_2 = false;
-              this.spring_first_fade=false;
-             }
-          if ((window.innerHeight + window.scrollY) >= wrapper.offsetHeight) {
-          this.now_relative_scrolled_bottom=true;
-          this.section_3_transform= -100+"%";
-          this.benifits_of_mazda_brake_fade_text=true;
-            benifits_of_mazdabreakElement.style.top=-document.documentElement.clientHeight+"px"; 
-            benifits_of_mazdabreakElement.style.position="relative";
-          }else if(spring_tire_eventElement.clientHeight >= document.documentElement.scrollTop){
-            this.section_3_transform='0';
-            this.benifits_of_mazda_brake_fade_text=false;
-            benifits_of_mazdabreakElement.removeAttribute("style");
+              bodyElement.classList.add('keep-front');
+              spring_tire_eventElement.removeAttribute('style');
+              this.spring_first_fade = false;
           }
-          if((spring_tire_eventElement.clientHeight + benifits_of_mazdabreakElement.clientHeight - document.documentElement.clientHeight/2) < document.documentElement.scrollTop){
-            //console.log("yes")
-            this.genuine_mazda_accessories_fade_text=true;
+          
+          if ((spring_tire_eventElement.clientHeight + benifits_of_mazdabreakElement.clientHeight - document.documentElement.clientHeight / 2) < document.documentElement.scrollTop) {
+              this.genuine_mazda_accessories_fade_text = true;
+
               if ((window.innerHeight + window.scrollY) >= wrapper.offsetHeight) {
-                genuine_mazda_accessoriesElement.style.top=-document.documentElement.clientHeight+"px"; 
-              genuine_mazda_accessoriesElement.style.position="relative";
-            }
-          }else if((spring_tire_eventElement.clientHeight + benifits_of_mazdabreakElement.clientHeight - document.documentElement.clientHeight/2) >= document.documentElement.scrollTop){
-            //console.log("yes");
-            i=0;
-            j=0;
-            this.genuine_mazda_accessories_fade_text=false;
-            this.setParallex_independent_left='';
-            this.setParallex_independent_right='';
-            genuine_mazda_accessoriesElement.removeAttribute("style");
+                  genuine_mazda_accessoriesElement.style.top = -document.documentElement.clientHeight + "px";
+                  genuine_mazda_accessoriesElement.style.position = "relative";
+              }
+          } else {
+              this.genuine_mazda_accessories_fade_text = false;
           }
-          if(scroll < postion){
-            if((spring_tire_eventElement.clientHeight + benifits_of_mazdabreakElement.clientHeight) >= document.documentElement.scrollTop && genuine_mazda_accessoriesElement.style.position==='relative'){
-               //console.log("yes1");              
-                i=0;
-                j=0;
-              this.genuine_mazda_accessories_fade_text=false;
-              this.setParallex_independent_left='';
-               this.setParallex_independent_right='';
+          if (this.checkVisible(genuine_mazda_accessoriesElement) && genuine_mazda_accessoriesElement.offsetTop > document.documentElement.scrollTop) {
+              this.genuine_mazda_accessories_fade_text = false;
               genuine_mazda_accessoriesElement.removeAttribute("style");
-            }
-            if((spring_tire_eventElement.clientHeight + benifits_of_mazdabreakElement.clientHeight +genuine_mazda_accessoriesElement.clientHeight + document.documentElement.clientHeight/2) >= document.documentElement.scrollTop && maintain_your_joyElement.style.position==='relative'){
-              console.log("yes");
+          }
+
+          if ((spring_tire_eventElement.clientHeight + benifits_of_mazdabreakElement.clientHeight + genuine_mazda_accessoriesElement.clientHeight - document.documentElement.clientHeight / 2) < document.documentElement.scrollTop) {
+              this.maintain_your_joy_fade_text = true;
+              if ((window.innerHeight + window.scrollY) >= wrapper.offsetHeight) {
+                  maintain_your_joyElement.style.top = -document.documentElement.clientHeight + "px";
+                  maintain_your_joyElement.style.position = "relative";
+              }
+          } else {
+              this.maintain_your_joy_fade_text = false;
+          }
+          if (this.checkVisible(maintain_your_joyElement) && maintain_your_joyElement.offsetTop > document.documentElement.scrollTop) {
+              //console.log("done");
               this.maintain_your_joy_fade_text = false;
               maintain_your_joyElement.removeAttribute("style");
-            }
-            console.log('Scrolling Up Scripts');
+          }
+
+
+          if (this.checkVisible(footerElement) && (wrapper.clientHeight < document.documentElement.scrollTop + maintain_your_joyElement.clientHeight + footerElement.clientHeight)) {
+            console.log("sdfn")
+            //alert();
+              var totalHeight = 0;
+              allHeight && (allHeight as any as Array < HTMLElement > ).forEach((item, index) => {
+                  totalHeight += item.clientHeight;
+              });
+              wrapper.style.height = totalHeight - document.documentElement.clientHeight-1  /*+ footerElement.clientHeight*/ + 'px';
+          }
+          if (!this.checkVisible(footerElement)) {
+              wrapper.removeAttribute('style');
+          }
       }
-      if (!this.checkVisible(footerElement)) {
-                    if ((spring_tire_eventElement.clientHeight + benifits_of_mazdabreakElement.clientHeight + genuine_mazda_accessoriesElement.clientHeight - document.documentElement.clientHeight / 2) < document.documentElement.scrollTop) {
-                        //console.log("yes 1")
-                        i = 0;
-                        j = 0;
-                        this.maintain_your_joy_fade_text= true;
-                        this.setParallex_independent_left= '';
-                        this.setParallex_independent_left= '';
-                       // if ((window.innerHeight + window.scrollY) >= wrapper.offsetHeight) {
-                           // maintain_your_joyElement.style.top = - maintain_your_joyElement.clientHeight + "px";
-                            maintain_your_joyElement.style.top=-document.documentElement.clientHeight + "px"
-                            maintain_your_joyElement.style.position = "relative";
-                       // }
-                    }
-                }
-    }
+
+      if (document.documentElement.clientWidth < 991 && /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+         // console.log(window.innerHeight + window.scrollY);
+         // console.log(wrapper.offsetHeight);
+          if ((window.innerHeight + window.scrollY) == document.documentElement.clientHeight) {
+              spring_tire_eventElement && spring_tire_eventElement.removeAttribute("style")
+              this.scrollTop = '0';
+              this.section_2=false;
+              spring_tire_eventElement.removeAttribute('style');
+              this.spring_first_fade = false;
+
+          }
+          if ((window.innerHeight + window.scrollY) >=spring_tire_eventElement.clientHeight+document.documentElement.clientHeight ) {
+              this.now_relative_scrolled_bottom = true;
+              this.section_3_transform = -100 + "%";
+              this.benifits_of_mazda_brake_fade_text = true;
+              setTimeout(()=>{
+              if(genuine_break_maintain.style.transform==='translateY(-100%)'){
+                benifits_of_mazdabreakElement.style.position = "relative";
+                benifits_of_mazdabreakElement.style.top = -document.documentElement.clientHeight + "px";
+              }
+              if(genuine_break_maintain.style.transform==='translateY(0)'){
+                benifits_of_mazdabreakElement.removeAttribute("style");
+              }
+            },2000)
+          } else if (spring_tire_eventElement.clientHeight >= document.documentElement.scrollTop) {
+              this.section_3_transform = '0';
+              this.benifits_of_mazda_brake_fade_text = false;
+              benifits_of_mazdabreakElement.removeAttribute("style");
+          }
+          if ((spring_tire_eventElement.clientHeight + benifits_of_mazdabreakElement.clientHeight - document.documentElement.clientHeight / 2) < document.documentElement.scrollTop) {
+              //console.log("yes")
+              this.genuine_mazda_accessories_fade_text = true;
+              if ((window.innerHeight + window.scrollY) >= spring_tire_eventElement.clientHeight + benifits_of_mazdabreakElement.clientHeight + document.documentElement.clientHeight) {
+                //setTimeout(()=>{
+                  genuine_mazda_accessoriesElement.style.top = -document.documentElement.clientHeight + "px";
+                  genuine_mazda_accessoriesElement.style.position = "relative";
+                //},2000)
+              }
+          } else {
+              this.genuine_mazda_accessories_fade_text = false;
+          }
+          if (this.checkVisible(genuine_mazda_accessoriesElement) && genuine_mazda_accessoriesElement.offsetTop > document.documentElement.scrollTop && (window.innerHeight + window.scrollY) < spring_tire_eventElement.clientHeight + benifits_of_mazdabreakElement.clientHeight + document.documentElement.clientHeight) {
+              //console.log("yes");
+              i = 0;
+              j = 0;
+              this.setParallex_independent_left = '';
+              this.setParallex_independent_right = '';
+              genuine_mazda_accessoriesElement.removeAttribute("style");
+          }
+          if ((spring_tire_eventElement.clientHeight + benifits_of_mazdabreakElement.clientHeight + genuine_mazda_accessoriesElement.clientHeight - document.documentElement.clientHeight / 2) < document.documentElement.scrollTop/* && (window.innerHeight + window.scrollY) >= wrapper.offsetHeight - mobileSegment.clientHeight*/) {
+              this.maintain_your_joy_fade_text = true;
+              if ((window.innerHeight + window.scrollY) >= spring_tire_eventElement.clientHeight + benifits_of_mazdabreakElement.clientHeight + genuine_mazda_accessoriesElement.clientHeight + document.documentElement.clientHeight/*+mobileSegment.clientHeight*/) {
+                  maintain_your_joyElement.style.top = -document.documentElement.clientHeight + "px";
+                  maintain_your_joyElement.style.position = "relative";
+              }
+          } else {
+              this.maintain_your_joy_fade_text = false;
+          }
+          if (this.checkVisible(maintain_your_joyElement) && maintain_your_joyElement.offsetTop > document.documentElement.scrollTop && (window.innerHeight+window.scrollY)<spring_tire_eventElement.clientHeight + benifits_of_mazdabreakElement.clientHeight + genuine_mazda_accessoriesElement.clientHeight + document.documentElement.clientHeight) {
+              console.log("done");
+              // this.maintain_your_joy_fade_text=false;
+              maintain_your_joyElement.removeAttribute("style");
+          }
+
+
+          if (this.checkVisible(footerElement) /* && wrapper.clientHeight > document.documentElement.scrollTop+maintain_your_joyElement.clientHeight + footerElement.clientHeight*/ ) {
+              //console.log('footer visible');
+              var totalHeight = 0;
+              allHeight && (allHeight as any as Array < HTMLElement > ).forEach((item, index) => {
+                  totalHeight += item.clientHeight;
+              });
+              console.log(totalHeight);
+              wrapper.style.height = totalHeight - document.documentElement.clientHeight/*-footerElement.clientHeight*/+ 'px';
+          }
+          if (!this.checkVisible(footerElement)) {
+              wrapper.removeAttribute('style');
+          }
+      }
      
-      if(document.documentElement.clientWidth >= 991 && window.matchMedia("(orientation: landscape)").matches){
+      if(document.documentElement.clientWidth >= 991 && window.innerHeight > window.innerWidth){
           if ((window.innerHeight + window.scrollY) >= wrapper.offsetHeight) {
           this.now_relative_scrolled_bottom=true;
           this.section_3_transform= -100+"%";
@@ -1044,6 +1035,76 @@ export class MainStore {
           }
         }
         postion = scroll;
+    }
+
+
+    @action
+    heroSectionAnimate(){
+      var bodyElement=<HTMLElement>document.querySelector('body');
+      var now_relativeElement = <HTMLElement>document.querySelector('.spring_tire_event');
+      var hero_height = <HTMLElement>document.querySelector('.hero-banner-block');
+      this.scrollTop=-100+"%";
+      bodyElement.classList.remove('keep-front')
+      now_relativeElement.style.position='relative';
+      now_relativeElement.style.top =-hero_height.clientHeight+"px";
+    } 
+    @action
+    benifits_of_mazda_brake(){
+      var bodyElement=<HTMLElement>document.querySelector('body');
+      var now_relativeElement = <HTMLElement>document.querySelector('.spring_tire_event');
+      var hero_height = <HTMLElement>document.querySelector('.hero-banner-block');
+      var benifits_of_mazdabreakElement=<HTMLElement>document.querySelector(".benifits-of-mazda-brake");
+      this.scrollTop=-100+"%";
+      bodyElement.classList.remove('keep-front');
+      now_relativeElement.style.position='relative';
+      now_relativeElement.style.top =-hero_height.clientHeight+"px";
+      this.section_3_transform = -100 + "%";
+      this.benifits_of_mazda_brake_fade_text = true;
+      benifits_of_mazdabreakElement.style.top=-document.documentElement.clientHeight+"px"; 
+      benifits_of_mazdabreakElement.style.position="relative";
+    } 
+    @action
+    genuine_mazda_accessories(){
+      var bodyElement=<HTMLElement>document.querySelector('body');
+      var now_relativeElement = <HTMLElement>document.querySelector('.spring_tire_event');
+      var hero_height = <HTMLElement>document.querySelector('.hero-banner-block');
+      var benifits_of_mazdabreakElement=<HTMLElement>document.querySelector(".benifits-of-mazda-brake");
+      var genuine_mazda_accessoriesElement=<HTMLElement> document.querySelector(".genuine-mazda-accessories");
+      this.scrollTop=-100+"%";
+      bodyElement.classList.remove('keep-front');
+      now_relativeElement.style.position='relative';
+      now_relativeElement.style.top =-hero_height.clientHeight+"px";
+      this.section_3_transform = -100 + "%";
+      this.benifits_of_mazda_brake_fade_text = true;
+      benifits_of_mazdabreakElement.style.position="relative";
+      benifits_of_mazdabreakElement.style.top=-document.documentElement.clientHeight+"px"; 
+      this.genuine_mazda_accessories_fade_text = true;
+      genuine_mazda_accessoriesElement.style.position = "relative";
+      genuine_mazda_accessoriesElement.style.top = -document.documentElement.clientHeight + "px";
+    }
+
+    @action
+    maintain_your_joy(){
+      var bodyElement=<HTMLElement>document.querySelector('body');
+      var now_relativeElement = <HTMLElement>document.querySelector('.spring_tire_event');
+      var hero_height = <HTMLElement>document.querySelector('.hero-banner-block');
+      var benifits_of_mazdabreakElement=<HTMLElement>document.querySelector(".benifits-of-mazda-brake");
+      var genuine_mazda_accessoriesElement=<HTMLElement> document.querySelector(".genuine-mazda-accessories");
+      var maintain_your_joyElement=<HTMLElement> document.querySelector(".maintain-your-joy");
+      this.scrollTop=-100+"%";
+      bodyElement.classList.remove('keep-front');
+      now_relativeElement.style.position='relative';
+      now_relativeElement.style.top =-hero_height.clientHeight+"px";
+      this.section_3_transform = -100 + "%";
+      this.benifits_of_mazda_brake_fade_text = true;
+      benifits_of_mazdabreakElement.style.position="relative";
+      benifits_of_mazdabreakElement.style.top=-document.documentElement.clientHeight+"px"; 
+      this.genuine_mazda_accessories_fade_text = true;
+      genuine_mazda_accessoriesElement.style.position = "relative";
+      genuine_mazda_accessoriesElement.style.top = -document.documentElement.clientHeight + "px";
+      this.maintain_your_joy_fade_text = true;
+      maintain_your_joyElement.style.position = "relative";
+      maintain_your_joyElement.style.top = -document.documentElement.clientHeight + "px";
     }
 
     @action
@@ -1197,12 +1258,13 @@ export class MainStore {
             this.currentDealerInfo = dealer;
             this.dealerID = dealer.dealer_id;
             this.dealerName = dealer.dealer_name;
+            this.dealerShortName = dealer.dealer_short_name;
             this.dealerNumber = dealer.dealer_number;
             this.dealerAppointment = dealer.dealer_service_appointment;
-
             this.openNewRedirect(dealer);
             this.uri = `${dealer.dealer_short_name}${this._routerStore.CUSTOMERIDValue ? `?CUSTOMER_ID=${this._routerStore.CUSTOMERIDValue}` : ''}`;
             this._routerStore.history.push(this.uri);
+            //console.log(this.dealerName);
         } catch {}
 
     });
@@ -1251,6 +1313,8 @@ export class MainStore {
           this.searchPopupActionButton = button;
       })
   }
+
+
 
   trackOfferClick() {
     // track print offer

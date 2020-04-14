@@ -16,7 +16,7 @@ interface Props {
 class GenuineBreakMaintain extends Component<Props, {}>{
 	render(){
 		const { now_relative_scrolled_bottom,section_3_transform } = this.props.mainStore;
-		console.log(now_relative_scrolled_bottom,section_3_transform);
+		//console.log(now_relative_scrolled_bottom,section_3_transform);
 		return(
 			<section className={now_relative_scrolled_bottom ? "genuine-break-maintain animation_done_genuine_break has-fixed z-index-4 trans-5s animateIn" : "genuine-break-maintain  has-fixed z-index-4 trans-5s"} style={{transform:'translateY('+section_3_transform+')'}}>
 						        <div className="bg_cover desktop_view" style={{backgroundImage: 'url('+genuine_break_maintainance+')'}}>

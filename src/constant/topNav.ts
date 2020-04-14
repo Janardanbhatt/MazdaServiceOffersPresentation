@@ -17,6 +17,8 @@ export const STRTopNav = {
       the_experts: 'THE EXPERTS',
       accessories: 'ACCESSORIES',
       tires: 'TIRES',
+
+      top_brakes:'BRAKES'
     }
   }
 };

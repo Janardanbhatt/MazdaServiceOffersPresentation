@@ -15,7 +15,7 @@ interface Props {
 }
 
 @observer
-class AuthorizeDealer extends Component<Props, {}> {
+class AuthorizeDealerBottom extends Component<Props, {}> {
   render () {
     const { currentDealerInfo } = this.props.mainStore;
 
@@ -26,19 +26,19 @@ class AuthorizeDealer extends Component<Props, {}> {
                        <div className="text-center" style={{minHeight: '0px', paddingRight: '20px', paddingLeft: '20px'}}>
                             <div className="sec2_heading flw">
                                 {
-                                    (currentDealerInfo.dealer_number != '00000' ? <h1>{ currentDealerInfo.dealer_name }</h1> : '')
+                                    (currentDealerInfo.dealer_number != '00000' && currentDealerInfo.dealer_number != null ? <h1>{ currentDealerInfo.dealer_name }</h1> : '')
                                 }
                                 <Responsive minWidth={769}>
                                     {
-                                        (currentDealerInfo.dealer_number != '00000' ?  <p> {currentDealerInfo.dealer_address} • {currentDealerInfo.dealer_city} {currentDealerInfo.dealer_state}&nbsp;&nbsp;{currentDealerInfo.dealer_zip} • {currentDealerInfo.dealer_phone}</p> :'')
+                                        (currentDealerInfo.dealer_number != '00000' && currentDealerInfo.dealer_number != null ?  <p> {currentDealerInfo.dealer_address} • {currentDealerInfo.dealer_city}, {currentDealerInfo.dealer_state}&nbsp;&nbsp;{currentDealerInfo.dealer_zip} • {currentDealerInfo.dealer_phone}</p> :'')
                                     }
                                 </Responsive>
                                 <Responsive maxWidth={768} >
                                     {
-                                        (currentDealerInfo.dealer_number != '00000' ?  <p> {currentDealerInfo.dealer_address} • {currentDealerInfo.dealer_city} {currentDealerInfo.dealer_state}&nbsp;&nbsp;{currentDealerInfo.dealer_zip}</p> :'')
+                                        (currentDealerInfo.dealer_number != '00000' && currentDealerInfo.dealer_number != null ?  <p> {currentDealerInfo.dealer_address} • {currentDealerInfo.dealer_city}, {currentDealerInfo.dealer_state}&nbsp;&nbsp;{currentDealerInfo.dealer_zip}</p> :'')
                                     }
                                     {
-                                        (currentDealerInfo.dealer_number != '00000' ?  <p> {currentDealerInfo.dealer_phone}</p> :'')
+                                        (currentDealerInfo.dealer_number != '00000' && currentDealerInfo.dealer_number != null ?  <p> {currentDealerInfo.dealer_phone}</p> :'')
                                     }
                                 </Responsive>                                
                                 <div className="sec2_search flw">
@@ -88,9 +88,7 @@ class AuthorizeDealer extends Component<Props, {}> {
                                           href={ this.props.mainStore.quoteTires }
                                           target= "_blank" title="">
                                         <span>
-                                            <p style={{paddingRight: '25px', paddingLeft: '25px'}}>
                                             <FormattedMessage id="quote-your-tires" defaultMessage={ STRCONSTANT.common.default.quote_tires } />
-                                            </p>
                                         </span>
                                        </a> }
                                    </Responsive>
@@ -101,9 +99,7 @@ class AuthorizeDealer extends Component<Props, {}> {
                                           href={ this.props.mainStore.quoteTires }
                                           title="">
                                       <span>
-                                          <p style={{paddingRight: '25px', paddingLeft: '25px'}}>
                                       <FormattedMessage id="quote-your-tires" defaultMessage={ STRCONSTANT.common.default.quote_tires } />
-                                        </p>
                                       </span>
                                        </a> }
                                    </Responsive>
@@ -116,4 +112,4 @@ class AuthorizeDealer extends Component<Props, {}> {
     );
   }
 }
-export default typedInject('mainStore')(AuthorizeDealer);
+export default typedInject('mainStore')(AuthorizeDealerBottom);

@@ -67,17 +67,30 @@ class MobileMenu extends Component<Props, {}> {
         <li onClickCapture={this.toggle} onClick = {() => this.props.mainStore.trackingEventDealer("TopNav - Offers")} >
         <Scrollchor
             to="#offers"
-            animate={{offset: -100, duration: 600}} >
+            beforeAnimate={()=>this.props.mainStore.heroSectionAnimate()}
+            animate={{offset: 0, duration: 600}}>
           <a><FormattedMessage
             id="top-nav-offers"
             defaultMessage={ STRCONSTANT.topNav.default.offers } /></a>
             </Scrollchor>
         </li>
         <Divider />
+        <li onClickCapture={this.toggle} onClick = {() => this.props.mainStore.trackingEventDealer("TopNav - brakes")} >
+        <Scrollchor
+           to="#benifits-of-mazda-brake"
+           beforeAnimate={()=>this.props.mainStore.benifits_of_mazda_brake()}
+           animate={{offset: 0, duration: 600}} >
+          <a><FormattedMessage
+            id="top-nav-brakes"
+            defaultMessage={ STRCONSTANT.topNav.default.top_brakes } /></a>
+            </Scrollchor>
+        </li>
+        <Divider />
         <li onClickCapture={this.toggle} onClick = {() => this.props.mainStore.trackingEventDealer("TopNav - Accessories")}>
           <Scrollchor 
-            to="#accessories-1"
-            animate={{offset: -90, duration: 600}}
+             to="#accessories-1"
+             beforeAnimate={()=>this.props.mainStore.genuine_mazda_accessories()}
+             animate={{offset: 0, duration: 2000}}
           >
           <FormattedMessage
             id="top-nav-accessories"
@@ -89,7 +102,8 @@ class MobileMenu extends Component<Props, {}> {
         <li onClickCapture={this.toggle} onClick = {() => this.props.mainStore.trackingEventDealer("TopNav - Tires")}>
           <Scrollchor 
             to="#tires-1"
-            animate={{offset: -105, duration: 600}}
+            beforeAnimate={()=>this.props.mainStore.maintain_your_joy()}
+            animate={{offset: 0, duration: 3000}}
           >
           <FormattedMessage
             id="top-nav-tires"

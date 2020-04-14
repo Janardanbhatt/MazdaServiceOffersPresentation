@@ -3283,9 +3283,8 @@ table th[class*=col-] {
     .table-responsive > .table-bordered > tbody > tr:last-child > td,
     .table-responsive > .table-bordered > tbody > tr:last-child > th,
     .table-responsive > .table-bordered > tfoot > tr:last-child > td,
-    .table-responsive > .table-bordered > tfoot > tr:last-child > th {
-        border-bottom: 0
-    }
+    .table-responsive > .table-bordered > tfoot > tr:last-child > th{border-bottom: 0; }
+	
 }
 
 fieldset {
@@ -8431,7 +8430,7 @@ body {
 }
 
 p {
-    line-height: 1em;
+    line-height: 1.15em;
 }
 
 /* Table of Content
@@ -8460,6 +8459,13 @@ p {
 }
 
 .em .flw {
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    margin-top: 0px;
+}
+
+.em .top_header {
     float: left;
     width: 100%;
     box-sizing: border-box;
@@ -10962,7 +10968,7 @@ a, button {  -webkit-transition: 0.5s;-webkit-transition: 0.5s; transition: 0.5s
 /* make buttons play nice in IE */
 button, input[type=button] { width: auto; overflow: visible; }
 button:focus, textarea:focus, input:focus { outline: none; }
-.full-height { height: 100vh; min-height: 937px; }
+.full-height { height: 100vh; }
 .bg_cover { background-size: cover; background-repeat: no-repeat; background-position: center center;
 display: block; width: 100%; height: 100%; }    
 .mobile-hide { display: none; }
@@ -10987,13 +10993,16 @@ flex-wrap: wrap;}
 .align-items-end { align-items: flex-end; }
 .btn-block { width: 100%; text-align: center; }
 .btn-block:not(:last-child) { margin-bottom: 12px; }
-.btn_normal { background-color: #000000; padding: 14px 23px; border-radius: 3px; font-size: 15px; display: inline-block; color: #fff; text-transform: uppercase; min-width: 277px; text-decoration: none;   font-family: 'MazdaType-Bold'; font-weight: bold; -webkit-letter-spacing: 1.5px; -moz-letter-spacing: 1.5px; -ms-letter-spacing: 1.5px;
-letter-spacing: 1.5px; }    
+.btn_normal, .home #authorized-dealer .btn_black { background-color: #000000; padding: 14px 23px;
+ border-radius: 3px; font-size: 15px; display: inline-block; color: #fff; text-transform: uppercase; min-width: 320px; text-decoration: none;   font-family: 'MazdaType-Bold'; font-weight: bold; -webkit-letter-spacing: 1.5px; -moz-letter-spacing: 1.5px; -ms-letter-spacing: 1.5px; letter-spacing: 1.5px; }    
 .french .btn_normal { min-width: 564px;  }
-.btn_normal:hover, .btn_normal:focus { background-color: #910A2D; }    
+.home #authorized-dealer .btn_black { width: 320px; }
+.home #authorized-dealer .main .fn .button { padding-bottom: 10px !important; }
+.btn_normal:hover, .btn_normal:focus, .btn_black:hover, .btn_black:focus, .home #authorized-dealer .btn_black:hover, .home #authorized-dealer .btn_black:focus { background-color: #910A2D; color: #fff}    
 .text-center { text-align: center; }    
 h1 { color: #000000; font-size: 30px; }    
-    
+ .btn_black p{    padding-top: 3px;
+    padding-bottom: 3px;}   
 /* =====================================================
                     Header css
 ===================================================== */    
@@ -11007,7 +11016,13 @@ header nav ul li:not(:last-child) { padding-right: 34px; }
 .menu-block .top-links a { color: #FFFFFF; text-decoration: none; text-transform: uppercase; }    
 .menu-block .top-links > a { padding-right: 42px; font-size: 12px;   font-family: 'MazdaType-Bold'; font-weight: bold; color: #FFFFFF; padding-top: 5px; letter-spacing: 0.5px; }
 .menu-block nav { padding-top: 50px; }
-
+.top_header > span {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    bottom: 5px;
+    margin-bottom: 0;
+}
 /*Menu mobile*/ 
 .hamburger, header input[type="checkbox"] {
     right: 12.5%;
@@ -11076,7 +11091,8 @@ header input[type="checkbox"]:checked ~ .hamburger span:nth-child(3), header inp
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
 }    
-    
+    .drTqWA .header a span{font-size: 16px}
+    .drTqWA .header span{vertical-align: middle;}
  /* =====================================================
                     Center content css
 ===================================================== */   
@@ -11104,7 +11120,7 @@ header .top-links { justify-content: flex-end; align-content: center; }
 .second-panel-bottom-block { padding: 3% 0; background-color: #FFFFFF; } 
 .second-panel-bottom-block p span { padding-right: 25px;  }
 .second-panel-bottom-block p a { text-decoration: none; }    
-.second-panel-bottom-block p a, .second-panel-bottom-block p span {
+.second-panel-bottom-block p a, .second-panel-bottom-block p span, #authorized-dealer .sec2_heading > p {
     color: #000000;
     font-family: 'MazdaType';
     font-weight: normal;
@@ -11135,25 +11151,29 @@ header .top-links { justify-content: flex-end; align-content: center; }
 .second-panel-bottom-block p > span:after { display:none; }
 .second-panel-bottom-block p > span { padding-right: 0; }
 .get-up-block { background-color: #e8e8e8; }    
-.get-up-off:first-child > img { max-width: 111px;  margin: 0 auto; }    
-.get-up-off:last-child > img { max-width: 129px; margin: 0 auto; }        
+.get-up-off:first-child > img { max-width: 133px;  margin: 0 auto; }    
+.get-up-off:last-child > img { max-width: 133px; margin: 0 auto; }   
+.get-up-off > img { max-width: 133px; }
 .get-up-off > h2 {  padding: 12px 0 30px; }    
 .get-up-off h2 { font-size: 30px; line-height: 40px; margin: 0; text-transform: uppercase; font-family: 'MazdaType';font-weight: normal; letter-spacing: -0.2px; }    
 .get-up-off .border-top-bottom { padding: 15px 0; max-width: 950px; width: 100%; margin: 0 auto;     border-color: #d5d5d5; }
 .get-up-off:nth-child(2) a.print { padding-top: 45px; }
 .get-up-off .border-top-bottom h2  { font-weight: bold; }    
-.get-up-off > span { font-size: 18px; line-height: 26px; margin: 22px 0; display: block; color: #2c2c2e; font-family: 'MazdaType';font-weight: normal; letter-spacing: -0.1px; word-spacing: 0.3px; } 
+.get-up-off > span { font-size: 18px; line-height: 26px; margin: 22px 0 0; display: block; color: #2c2c2e; font-family: 'MazdaType';font-weight: normal; letter-spacing: -0.1px; word-spacing: 0.3px; } 
 .get-up-off > span, .get-up-off > p { max-width: 950px; margin-left: auto; margin-right: auto; width: 100%; }    
-.get-up-off > p { font-size: 12px;line-height:16px; color: #2c2c2e; font-family: 'MazdaType';font-weight: normal;  } .get-up-off:first-child { border-bottom: 2px solid #58595b; }   
-.get-up-off { padding: 103px 0 80px; }
+.get-up-off  p { font-size: 12px;line-height:16px; color: #2c2c2e; font-family: 'MazdaType';font-weight: normal;  }    
+.get-up-off { padding: 103px 0 0; }
 .get-up-off:nth-child(2) { padding: 78px 0 146px; }    
 .get-up-off svg { width: 16px; max-height: 18px; color: #101010; }
 .get-up-off .print { text-decoration: none; padding-top: 13px; display: block; }
-.get-up-off .print span { font-size: 18px; letter-spacing: 1.5px; color: #101010; font-family: 'MazdaType-Bold'; font-weight: bold; text-transform: uppercase; padding-left: 5px; }   
+.print-block-cust span { font-size: 18px; letter-spacing: 1.5px; color: #101010; font-family: 'MazdaType-Bold'; font-weight: bold; text-transform: uppercase; padding-left: 5px; }   
 .genuine-break-maintain .bg_cover h5 { color: #FFFFFF; font-size: 30px; margin: 0; line-height: 40px; margin: 0; padding-bottom: 9%; text-transform: uppercase; font-family: 'MazdaType-Medium'; font-weight: 500; letter-spacing: 1.5px; display: inline-block; max-width: 335px; width: 100%; }     
 .common-detail-block { background-color: #FFFFFF; }
 .common-detail-block h1 { font-size: 30px; line-height: 1.2; text-transform: uppercase; padding-bottom: 22px; font-family: 'MazdaType-Medium'; font-weight: 500; letter-spacing: 5px; word-spacing: -2px; }
 .common-detail-block p { font-size: 18px; line-height: 25px; font-family: 'MazdaType'; font-weight: normal; }    
+.common-detail-block p sup {
+    font-size: 10px;
+}
 .common-detail-block .btn-block { padding-top: 34px; }    
 .three-img-block .left { width: 50%; padding: 0 25px; } 
 .three-img-block .right { width: 50%; padding: 0 25px; }
@@ -11178,10 +11198,11 @@ header .top-links { justify-content: flex-end; align-content: center; }
 font-weight: normal; font-size: 18px; line-height: 33px; }
 .authorized-dealer-block p a, .authorized-dealer-block p span { color: #000000; font-family: 'MazdaType';
 font-weight: normal; font-size: 18px; line-height: 33px; position: relative;     letter-spacing: -0.1px; }    
-    .authorized-dealer-block p span { padding-right: 25px; }
+.authorized-dealer-block p span { padding-right: 25px; }
+.authorized-dealer-block p > span  { padding-right: 0; }  
 .authorized-dealer-block p span:after { content: ""; display: inline-block; width: 5px; height: 5px; border-radius: 50%; background-color: #000000; position: absolute; top: 50%; transform: translateY(-50%); -webkit-transform: translateY(-50%); right: 12px; }    
 .authorized-dealer-block p > span:after { display: none; padding-right: 0; }
-.authorized-dealer-block p{display: flex;align-items: center; justify-content: center; }
+.authorized-dealer-block p{display: flex;align-items: center; justify-content: center; flex-wrap: wrap; }
 .spring-tire-logo, .panel-details { opacity: 0;  transition: 4.5s 3s all; -webkit-transition: 4.5s 3s all;  }
 .content-animated .spring-tire-logo, .content-animated .panel-details {   -webkit-animation: fadeIn 1500ms ease-in-out 1s both;
 animation: fadeIn 1500ms ease-in-out 1s both; }
@@ -11193,7 +11214,23 @@ animation: fadeIn 1500ms ease-in-out 1s both; }
 #languageselector > span {  padding-right: 42px; }
 #languageselector > span > a { text-transform: uppercase; }
 
-    
+.genuine-break-maintain { height:100vh; }
+.genuine-break-maintain .full-height { min-height: 100%; }
+.print-block-cust { padding-bottom: 80px; padding-top: 15px; border-bottom: 2px solid #58595b; }
+
+.get-up-block:last-of-type .print-block-cust { border-bottom: 0; }
+#authorized-dealer .fn.sec2_search_main { margin-top:0 !important; }
+.get-up-off > span:last-of-type { font-size: 12px; line-height:16px; }
+#languageselector > p:first-child {
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+/*09-04-2020*/
+
+
+
+	
 /* =====================================================
                     Footer css
 ===================================================== */   
@@ -11230,37 +11267,72 @@ footer span { color: #c3c3c3; font-size: 12px; line-height: 16px; padding-top: 3
 
 
     @media (max-width:1440px) {
-        .full-height {  min-height: 900px; }
+       /* .full-height {  min-height: 900px; } */
     }
 
     @media (max-width:1366px) {
-        .full-height {  min-height: 768px; }
-        .scroll-second-panel .panel-details { padding-top: 35px; }
-        .select-dealer { padding: 1px 0 18px; }
+       /* .full-height {  min-height: 768px; } */
+        .scroll-second-panel .panel-details { padding-top: 30px; }
+        .select-dealer { padding: 1px 0 12px; }
+        .genuine-break-maintain .bg_cover h5 { padding-bottom: 5%; }
+        .second-panel-bottom-block h1 { font-size: 22px; padding-bottom: 0; }
+         /*.second-panel-bottom-block, .second-panel-top-block { height: 50%; } */
+        .spring-tire-logo { padding-top: 5%; }
+        .panel-details h3 { font-size: 20px; line-height: 24px; max-width: 395px; padding-bottom: 10px; }
+        .panel-details p { font-size: 20px; line-height: 24px; }
+        .second-panel-bottom-block p a, .second-panel-bottom-block p span, #authorized-dealer .sec2_heading > p { font-size:14px;  }
+         .home #authorized-dealer .btn_black, .btn_normal, .em a.btn_black { font-size:13px; padding: 8px 12px; }
+		 #authorized-dealer .fn.sec2_search_main { padding-bottom: 0!important; padding-top: 5px !important; }
+		 #authorized-dealer .sc-iwsKbI .btn_black { margin-top: 13px !important; }
+		 .home .svg-inline--fa.fa-w-16 {
+				width: 0.8em;
+         }
+
     }
     
     @media (max-width:1349px) {
-        .full-height {  min-height: 625px; }
         .spring-tire-logo { padding-top: 2%; max-width: 380px; }
-        .second-panel-bottom-block { padding: 2% 0; }
+        .spring_tire_event .second-panel-bottom-block { padding: 20px 0; }
         .select-dealer { padding: 1px 0 10px; } 
-        .btn_normal { padding: 14px 10px; min-width: 277px; }
         .btn-block:not(:last-child) { margin-bottom: 10px; }
-        
+		
     }
+    
+   @media screen and (max-width: 1349px) , screen and (max-height: 625px) {
+	  .spring_tire_event .full-height .second-panel-bottom-block {
+			padding: 1.2% 0;
+	  }
+	  .spring-tire-logo {
+			padding-top: 3%;
+      }
+	  .spring-tire-logo {  max-width: 510px; }
+			  .panel-details h3 {
+			font-size: 18px;
+			line-height: 20px;
+			max-width: 395px;
+			padding-bottom: 10px;
+		}
+		.panel-details p {
+			font-size: 18px;
+			line-height: 20px;
+		}
+		
+	  	
+	  
+   }
 
     @media (max-width:1200px) {
         .container { padding: 0 15px; }
     }
     
     @media (max-width:1024px) { 
+		.get-up-off:first-child > img, .get-up-off > img { max-width: 96px; }
         .tablet_view { display: block; }
-        .full-height { min-height:auto;  }
-        .scroll-second-panel .panel-details { padding-top: 30px; }
+       /* .full-height { min-height:auto;  } */
+        .spring_tire_event .scroll-second-panel .panel-details { padding-top: 60px; padding-left: 30px; }
         .only-desktop-mobile { display: none; }
-        
         .two-img-block .left figure{ bottom: 0; transition: all 0.5s; -webkit-transition: all 0.5s; }
-        .two-img-block .right figure { top: 0; height: 130%; transition: all 0.5s; -webkit-transition: all 0.5s; }
+        .two-img-block .right figure { top: 0; height: 130%; transition: all 0.3s; -webkit-transition: all 0.3s; }
          .two-img-block .left figure {
             bottom: -100px;
         }
@@ -11270,12 +11342,20 @@ footer span { color: #c3c3c3; font-size: 12px; line-height: 16px; padding-top: 3
         }
         .two-img-block .left > .bg_cover, .two-img-block .right > .bg_cover  { padding-bottom: 68vh; }
         .two-img-block .right { margin-top: -10vh; }
-        .second-panel-bottom-block {
-            padding: 3% 0;
+        
+        .spring_tire_event .second-panel-bottom-block {
+            padding: 2% 0;
+            height: 40%;
         }
-        .second-panel-top-block .spring-tire-logo { max-width: none; width:575px; }
-         .second-panel-top-block .spring-tire-logo img { width: 100%; }
-         .second-panel-top-block .spring-tire-logo { top:50px; }
+        .spring_tire_event .second-panel-top-block { height:60%; }
+        .second-panel-top-block .spring-tire-logo { max-width: none; width:510px; }
+        .second-panel-top-block .spring-tire-logo img { width: 100%; }
+        .second-panel-top-block .spring-tire-logo { top:50px; margin-left: 30px; }
+		.get-up-off { padding: 80px 0 0; }
+		.home #authorized-dealer .btn_black,  .btn_normal, .em a.btn_black { font-size: 15px; }
+		.overlay-hero-logo { margin: 0 auto; }
+		
+		
     }
     /*------------Tablet portrait  view------*/
     @media (max-width:991px) {
@@ -11323,34 +11403,64 @@ footer span { color: #c3c3c3; font-size: 12px; line-height: 16px; padding-top: 3
         header nav ul li:not(:last-child) a:after { display: none; }
         .overlay-hero-logo { max-width: 100%; padding-top: 38.5%; }
         .overlay-hero-logo img { width: 100%; }
-        .second-panel-top-block { height: 65%; }
-        .second-panel-top-block .spring-tire-logo { display: block; position: absolute; left: 0; right: 0; margin: 0 auto;  }
+        /* .second-panel-top-block { height: 65%; }  */
+        .second-panel-top-block .spring-tire-logo { display: block; position: absolute; left: 0; right: 0; margin: 0 auto; width:510px; }
         .second-panel-top-block .tablet_view { display: flex; align-items: flex-end; padding-bottom: 35px; }
-        .get-up-off { padding: 97px 0 78px; }
+        .get-up-off { padding: 45px 0 0; }
         .get-up-off > h2 { padding: 18px 0 27px; }
-        .get-up-off:first-child > span { max-width: 367px; line-height: 25px; }
+        .get-up-off:first-child > span { max-width: 580px; }
+		
         .get-up-off .print { padding-top: 28px; }
         .get-up-off:nth-child(2) a.print { padding-top: 29px; }
         .get-up-off:nth-child(2) { padding: 38px 0 97px; }
-        .genuine-break-maintain .bg_cover h5 { padding-bottom: 15%; height: auto; }
+        .genuine-break-maintain .bg_cover h5 { padding-bottom: 25%; height: auto; }
         .three-img-block .right, .three-img-block .left { width: 100%;  padding: 0; }
         .three-img-block, .two-img-block { height: auto; }
         .three-img-block .top-block { margin-bottom: 44px; padding-bottom: 41.5vh; }
         .three-img-block .bottom-block { padding-bottom: 41.7vh; height: auto; margin-bottom: 44px; }
-        .three-img-block .right .bg_cover { padding-bottom: 41.51vh; height: auto; }
+        .three-img-block .right .bg_cover { padding-bottom: 48.51vh; height: auto; }
         .common-detail-block .btn-block { padding-top: 40px; }
         .two-img-block .left, .two-img-block .right { width: 100%; height: auto; }
         .authorized-dealer-block { padding: 15.5% 0 13%; }
-        .btn_normal { padding: 14px 10px; min-width: 277px; }   
+        .btn_normal { padding: 10px; min-width: 277px; }   
         .french .btn_normal { padding: 14px 10px; min-width: 500px; }   
         .french .genuine-break-maintain .bg_cover h5 { max-width: 390px;  } 
-        .two-img-block,.three-img-block .left{ background-color:#000; } 
+        .two-img-block,.three-img-block .left{ background-color:#fff; } 
         .three-img-block { background-color:transparent !important;}
 
         .common-detail-block { background-color: #000000; transition: 2s all; -webkit-transition: 2s all; }
+		
         .anmiateFadeOut .common-detail-block { background-color: #FFFFFF; }
-        .second-panel-bottom-block { padding: 5% 0; }
-
+		
+		.common-detail-block { background-color: #000000; transition: 2s all; -webkit-transition: 2s all; }
+		.spring_tire_event > .full-height { position: relative; }
+		/*.spring_tire_event > .full-height:after {
+			content: "";
+			display: block;
+			width: 100%;
+			height: 100%;
+			background-color: #000000;
+			position: absolute;
+			z-index: 1;
+			top: 0;
+			 transition: 2s all; -webkit-transition: 2s all;
+		}
+		.spring_tire_event.now-relative > .full-height:after {
+			height:0;
+		}*/
+		
+        .spring_tire_event .second-panel-top-block {
+            height: 66%;
+        }
+        .spring_tire_event .second-panel-bottom-block {
+            height: 34%;
+            padding: 5% 0; 
+        }
+		.spring_tire_event .scroll-second-panel .panel-details { padding-left: 0;  }
+        
+		.three-img-block .right .bg_cover figure{
+			background-position: center bottom;
+		}
     }
     /*------------Mobile landscape  view------*/
     @media (max-width:767px) { 
@@ -11359,25 +11469,26 @@ footer span { color: #c3c3c3; font-size: 12px; line-height: 16px; padding-top: 3
         .tablet_view, .only-tablet-view { display: none; }
         .only-desktop-mobile { display: block; }
         .second-panel-top-block .tablet_view { display: none; }
-        .second-panel-top-block .mobile_view { display: flex; align-items: flex-end; padding-bottom: 35px; }
+        .second-panel-top-block .mobile_view { display: flex; align-items: flex-end; padding-bottom: 20px; }
         .scroll-second-panel .panel-details { padding-top: 0; text-align: center; }
         .panel-details h3 { font-size: 18px; letter-spacing: 1.8px;  }
         .second-panel-bottom-block h1, .panel-details p { font-size: 18px; line-height: normal; }
         .panel-details p { line-height: 25px; }
-        .second-panel-bottom-block p a, .second-panel-bottom-block p span { font-size: 12px; line-height: 20.81px; }
+        .second-panel-bottom-block p a, .second-panel-bottom-block p span, #authorized-dealer .sec2_heading > p { font-size: 89%; line-height: 1.15em; }
         .select-dealer { padding: 1px 0 15px; }
-        .btn_normal { padding: 10px 15px; font-size: 10px; min-width: 208px;  }
+        .btn_normal {   font-size: 15px;    }
         .get-up-off:first-child > img { max-width: 74px; }
-        .get-up-off { padding: 50px 0 40px; }
-        .get-up-off h2 { font-size: 18px; line-height: 26.48px; }
+        .get-up-off { padding: 55px 0 0; }
+        .get-up-off h2 { font-size: 20px; line-height: 26.48px; }
         .get-up-off > h2 { padding: 10px 0 20px; }
         .get-up-off .border-top-bottom { padding: 8px 0; }
         .get-up-off > span { font-size: 12px; line-height: 17.21px !important; margin: 18px auto; }
         .get-up-off:first-child > span { max-width: 250px; }
+		.get-up-off > span:last-of-type { max-width:100%; }
         .get-up-off .print { padding-top: 16px; }
         .get-up-off:last-child > img { max-width: 84px; }
         .get-up-off:nth-child(2) { padding: 38px 0 50px; }
-        .genuine-break-maintain .bg_cover h5 { font-size: 30px; margin: 0 auto; display: block; text-align: center; }
+        .genuine-break-maintain .bg_cover h5 { margin: 0 auto; display: block; text-align: center; }
         .common-detail-block h1 { font-size: 18px; line-height: 1.8; }
         .common-detail-block p { font-size: 18px; line-height: 24px; }
         .common-detail-block h1 { font-size: 18px; line-height: 1.8; letter-spacing: 3px; word-spacing: normal; }
@@ -11400,10 +11511,13 @@ footer span { color: #c3c3c3; font-size: 12px; line-height: 16px; padding-top: 3
         .french .genuine-break-maintain .bg_cover h5 { font-size: 28px; letter-spacing: 1.8px; }    
         .mob-menu-text { font-size: 16px; } 
         .hero-banner-block .overlay-hero-logo { padding-top: 53%; }        
-        .two-img-block .right {
-            margin-top: -30vh;
-        }
-
+        .two-img-block .right { margin-top: -30vh; }
+        .spring_tire_event .second-panel-bottom-block { padding: 3% 0; }
+        .print-block-cust { padding-bottom: 40px; }
+		.home #authorized-dealer .main .fn .button { padding-bottom: 8px !important; }
+		.home #authorized-dealer .btn_black,   .btn_normal, .em a.btn_black { padding: 5px 15px; width: 290px;min-width: 290px;}
+        .btn_black p{padding-left: 0;padding-right: 0}
+		.second-panel-top-block .spring-tire-logo { width: 410px; padding-top: 0; }
     }    
     @media (max-width:640px) { 
         .container { max-width: 365px; }
@@ -11414,23 +11528,23 @@ footer span { color: #c3c3c3; font-size: 12px; line-height: 16px; padding-top: 3
      @media (max-width:480px) { 
         .hamburger, header input[type="checkbox"] { right: 6%; }
         .mob-menu-text { right: 12%; }
-        .get-up-off > p { font-size: 8px; line-height: 10.21px; }
+        .get-up-off p { font-size: 8px; line-height: 10.21px; }
         .get-up-off .print span { font-size: 12px; }
         .common-detail-block p { max-width: 333px;  margin: 0 auto; }
         .common-detail-block h1 { font-size: 18px; line-height: normal; letter-spacing: 1.5px; }    
         .btn_normal { letter-spacing: 1px; }    
-        .second-panel-bottom-block { height: 40%; } 
-        .second-panel-top-block { height: 60%; } 
-        .second-panel-top-block .spring-tire-logo { max-width: calc(100% - 30px); }
+        .spring_tire_event .second-panel-top-block { height: 60%; } 
+        .spring_tire_event .second-panel-bottom-block { height: 40%; } 
+        
+        .second-panel-top-block .spring-tire-logo { max-width: none; width: 300px; }
     }
     @media (max-width:375px) { 
         .hamburger, header input[type="checkbox"] { right: 4%; }
         .mob-menu-text { right: 11%; }
         .french .second-panel-top-block .spring-tire-logo { max-width: none; width: 95%; }
-        .second-panel-top-block .spring-tire-logo { top: 50px; }
+        .second-panel-top-block .spring-tire-logo { top: 20px; max-width: none; width: 270px; }
         .second-panel-top-block .mobile_view { padding-bottom: 15px; }
-        
-        
+  
     }
     @media (max-width:360px) {  
         .panel-details p { line-height: normal; }   
@@ -11442,8 +11556,60 @@ footer span { color: #c3c3c3; font-size: 12px; line-height: 16px; padding-top: 3
         .panel-details h3 { letter-spacing: 1px; padding-bottom: 5px; } 
         .panel-details h3 { font-size: 16px; }
         .second-panel-bottom-block { padding: 3% 0; }
-
+        .spring_tire_event .second-panel-bottom-block { height: 47%; } 
+		/*09-04-2020*/
+		.spring_tire_event .second-panel-top-block { height: 55%; }
+			.home #authorized-dealer .btn_black, .btn_normal, .em a.btn_black {
+		font-size: 13px;
+	}
+		
     }
+	
+	@media (max-width: 767px) and  (max-height: 375px) and (orientation: landscape) {
+		.hero-banner-block .overlay-hero-logo {
+			padding-top: 42%;
+		}
+		.second-panel-top-block .spring-tire-logo { width: 400px;     top: 30px; }
+	}
+	
+	/* Header css after implement new page in */
+	@media screen and (max-width: 1399px)
+	{
+		.em .home .ui.basic.segment > .ui.container.main {
+			padding-left: 0;
+			padding-right: 0;
+		}
+	}
+	@media screen and (max-width: 1699px)
+	{
+		.em .home .ui.basic.segment > .ui.container.main {
+			padding-left: 0;
+			padding-right: 0;
+		}
+	}
+	@media screen and (max-width: 1999px)
+	{
+		.em .home .ui.basic.segment > .ui.container.main {
+			padding-left: 0;
+			padding-right: 0;
+		}
+	}
+	@media screen and (max-width: 2199px)
+	{
+		.em .home .ui.basic.segment > .ui.container.main {
+			padding-left: 0;
+			padding-right: 0;
+		}
+	}
+	@media screen and (max-width: 2499px)
+	{
+		.em .home .ui.basic.segment > .ui.container.main {
+			padding-left: 0;
+			padding-right: 0;
+		}
+	}
+	
+	
 .header { z-index: 10; position: relative; } 
 .three-img-block { background-color: #FFFFFF;s  }
 .has-fixed { position: fixed; width: 100%; left: 0; right: 0; top: 0; }
@@ -11464,4 +11630,6 @@ footer span { color: #c3c3c3; font-size: 12px; line-height: 16px; padding-top: 3
 html { overflow-y: initial; }  /*26-03-2020*/
 #root { height: 100%; } /*26-03-2020*/
 
+.btn_black span p span { color: white; font-size: 14px; font-weight: medium; letter-spacing: 1.5px; }
+body.keep-front{overflow:hidden;height:100%}
 `;

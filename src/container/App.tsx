@@ -19,10 +19,10 @@ class App extends Component<Props, {}> {
     document.title = (this.props.mainStore.lang === 'fr') ? `L'Événement Pneus Mazda` : 'The Mazda Tire Event';
   }
   render() {
-    const { lang, zonalApiCall,bodyMaxHeight } = this.props.mainStore;
+    const { lang, zonalApiCall } = this.props.mainStore;
     return (
       <IntlProvider locale={lang} messages={i18n[lang]}>
-        <div className="wrapper" style={{height :bodyMaxHeight+"px"}}>
+        <div className="wrapper">
           <div className="home">
           { zonalApiCall.case({
             pending: () => {},

@@ -17,7 +17,7 @@ class BenfitsOfMazdaBrake extends Component<Props, {}>{
 	render(){
 		const { benifits_of_mazda_brake_fade_text, setParallex} = this.props.mainStore;
 		return(
-			 <section className={benifits_of_mazda_brake_fade_text ? "two-section-merge benifits-of-mazda-brake has-fixed z-index-3 anmiateFadeOut" : "two-section-merge benifits-of-mazda-brake has-fixed z-index-3"}>
+			 <section className={benifits_of_mazda_brake_fade_text ? "two-section-merge benifits-of-mazda-brake has-fixed z-index-3 anmiateFadeOut" : "two-section-merge benifits-of-mazda-brake has-fixed z-index-3"} id='benifits-of-mazda-brake'>
 					   {/* <!--Common block start-->*/}
 					    <section className="common-detail-block">
 					       <div className="full-height d-flex align-items-center text-center">

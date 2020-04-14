@@ -88,8 +88,14 @@ interface Props {
 
 @observer
 class DesktopMenu extends Component<Props, {}> {
+  constructor(props) {
+       super(props)
+
+   }
+
+
   render () {
-    const {switchLanguage, lang } = this.props.mainStore;
+    const {switchLanguage, lang, dealerName } = this.props.mainStore;
     return (
       <StyleDesktopMenuComponent>
       <Segment basic className="head_padding flw">
@@ -101,10 +107,8 @@ class DesktopMenu extends Component<Props, {}> {
               </a>
             </Grid.Column>
             <Grid.Column width={13} style={{textAlign: "right"}}>
-              <div id="languageselector" className="top_header flw" style={{paddingTop: '0px', height: '30px'}}>
-                <FormattedMessage id='header_dealer_name' defaultMessage={ STRCONSTANT.common.default.header_dealer_name }/>
-                
-                
+              <div id="languageselector" className="top_header flw" style={{paddingTop: '0px', height: '30px', display: 'inline'}}>
+                <span style={{color: "white", fontSize: '14px'}}>{dealerName}</span>
                 <a style={{verticalAlign: 'top'}} onClick={ () => switchLanguage() }>
                 { <FormattedMessage id="common-lang-1" defaultMessage={ STRCONSTANT.common.default.lang_1 } /> } /
                 { <FormattedMessage id="common-lang-2" defaultMessage={ STRCONSTANT.common.default.lang_2 } /> }
@@ -116,11 +120,29 @@ class DesktopMenu extends Component<Props, {}> {
                     <List.Header>
                       <Scrollchor 
                         to="#offers"
-                        animate={{offset: -150, duration: 600}}
+                        beforeAnimate={()=>this.props.mainStore.heroSectionAnimate()}
+                        animate={{offset: 0, duration: 600}}
                       >
                       <FormattedMessage
                         id="top-nav-offers"
                         defaultMessage={ STRCONSTANT.topNav.default.offers }
+                      />
+                      </Scrollchor>
+                        <span style={{fontSize: '15px' , verticalAlign: 'bottom'}}>  | </span>
+                    </List.Header>
+                  </List.Content>
+                </List.Item>
+                <List.Item onClick = {() => this.props.mainStore.trackingEventDealer("TopNav - brakes")}>
+                <List.Content>
+                    <List.Header>
+                      <Scrollchor 
+                        to="#benifits-of-mazda-brake"
+                        beforeAnimate={()=>this.props.mainStore.benifits_of_mazda_brake()}
+                        animate={{offset: 10, duration: 600}}
+                      >
+                      <FormattedMessage
+                        id="top-nav-brakes"
+                        defaultMessage={ STRCONSTANT.topNav.default.top_brakes }
                       />
                       </Scrollchor>
                         <span style={{fontSize: '15px' , verticalAlign: 'bottom'}}>  | </span>
@@ -132,7 +154,8 @@ class DesktopMenu extends Component<Props, {}> {
                     <List.Header className='top-nav-accessories'>
                       <Scrollchor 
                         to="#accessories-1"
-                        animate={{offset: -110, duration: 600}}
+                        beforeAnimate={()=>this.props.mainStore.genuine_mazda_accessories()}
+                        animate={{offset: 0, duration: 2000}}
                       >
                       <FormattedMessage
                         id="top-nav-accessories"
@@ -148,7 +171,8 @@ class DesktopMenu extends Component<Props, {}> {
                       <List.Header>
                         <Scrollchor 
                           to="#tires-1"
-                          animate={{offset: -130, duration: 600}}
+                          beforeAnimate={()=>this.props.mainStore.maintain_your_joy()}
+                          animate={{offset: 0, duration: 3000}}
                         >
                         <FormattedMessage
                           id="top-nav-tires"
